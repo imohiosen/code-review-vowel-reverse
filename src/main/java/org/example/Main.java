@@ -1,17 +1,38 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+/**
+ * Solution for reversing vowels in a string
+ */
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Solution solution = new Solution();
+        
+        // Test with examples from the README
+        String example1 = "IceCreAm";
+        System.out.println("Example 1:");
+        System.out.println("Input: " + example1);
+        System.out.println("Output: " + solution.reverseVowels(example1));
+        
+        String example2 = "leetcode";
+        System.out.println("\nExample 2:");
+        System.out.println("Input: " + example2);
+        System.out.println("Output: " + solution.reverseVowels(example2));
+    }
+}
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+class Solution {
+    public String reverseVowels(String s) {
+        char[] word = s.toCharArray();
+        String vowels = "aeiouAEIOU";
+        for (int start = 0, end = s.length() - 1; start < end; ) {
+            if (vowels.indexOf(word[start]) > -1) start++;
+            else if (vowels.indexOf(word[end]) == -1) end--;
+            else {
+                char temp = word[start];
+                word[start++] = word[end--];
+                word[end--] = temp;
+            }
         }
+        return new String(word);
     }
 }
